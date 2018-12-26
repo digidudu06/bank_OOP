@@ -37,7 +37,7 @@ public class MemberBean {
 
 	@Override
 	public String toString() {
-		return String.format("이름%s\n 아이디%s\n 비밀번호%s\n 주민번호%s", name, id, pass, ssn);
+		return String.format("[회원 정보]\n 이름%s\n 아이디%s\n 비밀번호%s\n 주민번호%s", name, id, pass, ssn);
 	}
 
 }
