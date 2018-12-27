@@ -4,9 +4,15 @@ package controller;
 import javax.swing.JOptionPane;
 
 import domain.AccountBean;
+import domain.AdminBean;
+import domain.ArticleBean;
 import domain.MemberBean;
 import service.AccountService;
 import service.AccountServiceImpl;
+import service.AdminService;
+import service.AdminServiceImpl;
+import service.ArticleService;
+import service.ArticleServiceImpl;
 import service.MemberService;
 import service.MemberServiceImpl;
 
@@ -19,8 +25,12 @@ public class BankController {
 	public void start() {
 		MemberBean member = null;
 		AccountBean account = null;
+		ArticleBean article = null;
+		AdminBean admin = null;
 		MemberService memberService = new MemberServiceImpl();
 		AccountService accountService = new AccountServiceImpl();
+		ArticleService articleService = new ArticleServiceImpl();
+		AdminService adminService = new AdminServiceImpl();
 
 		while (true) {
 			switch (JOptionPane.showInputDialog("[메뉴]\n " + "0.종료\n" + "1.회원가입\n" + "2.전체조회\n" + "3.이름으로 조회\n"
@@ -32,7 +42,8 @@ public class BankController {
 							+ "13.계좌 유무\n"
 							+ "14.입금\n"
 							+ "15.출금\n"
-							+ "16.계좌 삭제")) {
+							+ "16.계좌 삭제\n"
+							+ "17.기타")) {
 			case "0":
 				JOptionPane.showMessageDialog(null, "종료");
 				return;
@@ -68,14 +79,6 @@ public class BankController {
 				memberService.deleteMember(JOptionPane.showInputDialog("아이디"),	JOptionPane.showInputDialog("비밀번호"),
 						JOptionPane.showInputDialog("주민"));
 				break;
-		/*		+ "9.계좌 생성\n"
-				+ "10.계좌 확인\n"
-				+ "11.계좌로 찾기\n"
-				+ "12.계좌 수\n"
-				+ "13.계좌 유무\n"
-				+ "14.입금\n"
-				+ "15.출금\n"
-				+ "16.계좌 삭제")*/
 			case "9": 
 				accountService.creatAccount(0);
 				break;
@@ -105,6 +108,28 @@ public class BankController {
 				break;
 			case "16":
 				accountService.deleteAccountNum(JOptionPane.showInputDialog("없앨 계좌"));
+				break;
+				// 기타(게시판, 관리자)
+			case "17": 
+				switch(JOptionPane.showInputDialog
+						("1.게시판 생성\n"
+						+ "2.게시 목록보기\n"
+						+ "3.작성자로 찾기\n")) {
+				case "1":
+					String title = JOptionPane.showInputDialog("글제목");
+					String content = JOptionPane.showInputDialog("내용");
+					String writer = JOptionPane.showInputDialog("작성자");
+					String bulletinPass = JOptionPane.showInputDialog("게시글 비번");
+					articleService.creatBulletinBoard(title, content, writer, bulletinPass);
+					break;
+				case "2": 
+					JOptionPane.showMessageDialog(null, articleService.findAll());
+					break;
+				case "3": 
+					JOptionPane.showMessageDialog(null, articleService.findTitles(JOptionPane.showInputDialog("작성자 입력")));
+					break;
+				
+				}
 				break;
 
 			}

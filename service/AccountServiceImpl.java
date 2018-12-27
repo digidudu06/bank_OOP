@@ -16,8 +16,8 @@ public class AccountServiceImpl implements AccountService {
 	private ArrayList<AccountBean> list;
 
 	/*
-	 * private ArrayList<String> list2; private ArrayList<int> list3; //ArrayList는
-	 * 객체 배열이므로 int들어갈 수 없다.
+	 * private ArrayList<String> list2; 
+	 * private ArrayList<int> list3; //ArrayList는 객체 배열이므로 int들어갈 수 없다.
 	 */
 	public AccountServiceImpl() {
 		list = new ArrayList<>();
@@ -67,14 +67,14 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public boolean existAccount(String accountNum) {
-		boolean ok = false;
+		boolean ok = false;	//boolean exist = false;
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getAccountNum().equals(accountNum)) {
 				ok = true;
 				break;
 			}
 		}
-		return ok;
+		return ok;	//return exist;
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class AccountServiceImpl implements AccountService {
 	public void withdrawMoney(String accountNum, int money) {
 		int withdrawMoney = 0;
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getAccountNum().equals(accountNum) && money > 0 && list.get(i).getMoney() > money) {
+			if (list.get(i).getAccountNum().equals(accountNum) && money > 0 && list.get(i).getMoney() >= money) {
 				withdrawMoney = list.get(i).getMoney() - money;
 				list.get(i).setMoney(withdrawMoney);
 				break;
