@@ -3,7 +3,7 @@ package domain;
 /**
  * @author Park EunJi
  * @date 2018. 12. 26.
- * @desc 은행계좌 빈객체
+ * @desc 은행 계좌 빈객체
  */
 public class AccountBean {
 	private String accountNum, today;

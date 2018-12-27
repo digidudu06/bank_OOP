@@ -1,5 +1,10 @@
 package domain;
 
+/**
+ * @author Park EunJi
+ * @date 2018. 12. 27.
+ * @desc 회원 관리 빈객체
+ */
 public class MemberBean {
 	private String name, id, pass, ssn;
 

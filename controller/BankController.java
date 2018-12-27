@@ -1,5 +1,6 @@
 package controller;
 
+
 import javax.swing.JOptionPane;
 
 import domain.AccountBean;
@@ -9,6 +10,11 @@ import service.AccountServiceImpl;
 import service.MemberService;
 import service.MemberServiceImpl;
 
+/**
+ * @author Park EunJi
+ * @date 2018. 12. 27.
+ * @desc 은행 컨트롤러
+ */
 public class BankController {
 	public void start() {
 		MemberBean member = null;

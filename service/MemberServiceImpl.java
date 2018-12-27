@@ -2,6 +2,11 @@ package service;
 
 import domain.MemberBean;
 
+/**
+ * @author Park EunJi
+ * @date 2018. 12. 27.
+ * @desc 회원 관리 구현객체
+ */
 public class MemberServiceImpl implements MemberService {
 	private MemberBean[] members;
 	private MemberBean[] membersName;

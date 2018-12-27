@@ -10,7 +10,7 @@ import domain.AccountBean;
 /**
  * @author Park EunJi
  * @date 2018. 12. 26.
- * @desc 은행계좌 구현객체
+ * @desc 은행 계좌 구현객체
  */
 public class AccountServiceImpl implements AccountService {
 	private ArrayList<AccountBean> list;
@@ -38,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
 		Random random = new Random();
 		accountNum = random.nextInt(9000) + 1000 + "-";
 		for (int i = 0; i < 4; i++) {
-			accountNum += random.nextInt(9) + 1 + "";
+			accountNum += random.nextInt(10) + "";
 		}
 		return accountNum;
 	}

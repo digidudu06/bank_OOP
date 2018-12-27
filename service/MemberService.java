@@ -5,7 +5,7 @@ import domain.MemberBean;
 /**
  * @author Park EunJi
  * @date 2018. 12. 26.
- * @desc 멤버기능 구현객체
+ * @desc 회원 관리 서비스
  */
 public interface MemberService {
 	/**
