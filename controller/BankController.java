@@ -18,7 +18,15 @@ public class BankController {
 
 		while (true) {
 			switch (JOptionPane.showInputDialog("[메뉴]\n " + "0.종료\n" + "1.회원가입\n" + "2.전체조회\n" + "3.이름으로 조회\n"
-					+ "4.아이디로 조회\n" + "5.가입자 수\n" + "6.로그인\n" + "7.비밀번호 변경\n" + "8.회원 탈퇴")) {
+					+ "4.아이디로 조회\n" + "5.가입자 수\n" + "6.로그인\n" + "7.비밀번호 변경\n" + "8.회원 탈퇴\n"
+							+ "9.계좌 생성\n"
+							+ "10.계좌 확인\n"
+							+ "11.계좌로 찾기\n"
+							+ "12.계좌 수\n"
+							+ "13.계좌 유무\n"
+							+ "14.입금\n"
+							+ "15.출금\n"
+							+ "16.계좌 삭제")) {
 			case "0":
 				JOptionPane.showMessageDialog(null, "종료");
 				return;
@@ -53,6 +61,44 @@ public class BankController {
 			case "8":
 				memberService.deleteMember(JOptionPane.showInputDialog("아이디"),	JOptionPane.showInputDialog("비밀번호"),
 						JOptionPane.showInputDialog("주민"));
+				break;
+		/*		+ "9.계좌 생성\n"
+				+ "10.계좌 확인\n"
+				+ "11.계좌로 찾기\n"
+				+ "12.계좌 수\n"
+				+ "13.계좌 유무\n"
+				+ "14.입금\n"
+				+ "15.출금\n"
+				+ "16.계좌 삭제")*/
+			case "9": 
+				accountService.creatAccount(0);
+				break;
+			case "10":
+				JOptionPane.showMessageDialog(null, accountService.findAll());
+				break;
+			case "11": 
+				String accountNum = JOptionPane.showInputDialog("계좌 번호 입력");
+				JOptionPane.showMessageDialog(null, accountService.findByAccountNum(accountNum));
+				break;
+			case "12": 
+				JOptionPane.showMessageDialog(null, accountService.countAccount());
+				break;
+			case "13": //
+				accountNum = JOptionPane.showInputDialog("확인할 계좌 번호 입력");
+				if(accountService.existAccount(accountNum)) {
+					JOptionPane.showMessageDialog(null, "계좌가 존재합니다.");
+				}else {
+					JOptionPane.showMessageDialog(null, "계좌가 존재하지 않습니다.");
+				}
+				break;
+			case "14": 
+				accountService.depositMoney(JOptionPane.showInputDialog("입금 할 계좌 입력"), Integer.parseInt(JOptionPane.showInputDialog("입금액")));
+				break;
+			case "15":
+				accountService.withdrawMoney(JOptionPane.showInputDialog("출금 할 계좌 입력"), Integer.parseInt(JOptionPane.showInputDialog("출금액")));
+				break;
+			case "16":
+				accountService.deleteAccountNum(JOptionPane.showInputDialog("없앨 계좌"));
 				break;
 
 			}

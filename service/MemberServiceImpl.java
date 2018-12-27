@@ -30,17 +30,20 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberBean[] findByName(String name) {
-		int a=0;
+		int a=0, b=0;
 		for(int i=0;i<count;i++) {
 			if(members[i].getName().equals(name)) {
 				a++;
 			}
 		}
 		membersName = new MemberBean[a];
-		for(int i=0, b=0;i<count;i++) {
+		for(int i=0;i<count;i++) {
 			if(members[i].getName().equals(name)) {
 				membersName[b] = members[i];
 				b++;
+				if(b==count) {
+					break;
+				}
 			}
 		}
 		
@@ -79,7 +82,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updatePass(String id, String pass, String newPass) {
 		for(int i=0;i<count;i++) {
-			if(existIfIdPass(id, pass)) {
+			if(members[i].getId().equals(id) && members[i].getPass().equals(pass)) {
 				members[i].setPass(newPass);
 				break;
 			}

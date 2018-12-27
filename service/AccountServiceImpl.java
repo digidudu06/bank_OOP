@@ -1,5 +1,10 @@
 package service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
+
 import domain.AccountBean;
 
 /**
@@ -7,62 +12,110 @@ import domain.AccountBean;
  * @date 2018. 12. 26.
  * @desc 은행계좌 구현객체
  */
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
+	private ArrayList<AccountBean> list;
 
-	@Override
-	public void creatAccountNum(int money) {
-		// TODO Auto-generated method stub
-		
+	/*
+	 * private ArrayList<String> list2; private ArrayList<int> list3; //ArrayList는
+	 * 객체 배열이므로 int들어갈 수 없다.
+	 */
+	public AccountServiceImpl() {
+		list = new ArrayList<>();
 	}
 
 	@Override
-	public AccountBean[] findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public void creatAccount(int money) {
+		AccountBean account = new AccountBean();
+		account.setAccountNum(creatAccountNum());
+		account.setMoney(money);
+		account.setToday(findToday());
+		list.add(account);
+	}
+
+	@Override
+	public String creatAccountNum() {
+		String accountNum = "";
+		Random random = new Random();
+		accountNum = random.nextInt(9000) + 1000 + "-";
+		for (int i = 0; i < 4; i++) {
+			accountNum += random.nextInt(9) + 1 + "";
+		}
+		return accountNum;
+	}
+
+	@Override
+	public ArrayList<AccountBean> findAll() {
+		return list;
 	}
 
 	@Override
 	public AccountBean findByAccountNum(String accountNum) {
-		// TODO Auto-generated method stub
-		return null;
+		AccountBean account = new AccountBean();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getAccountNum().equals(accountNum)) {
+				account = list.get(i);
+				break;
+			}
+		}
+		return account;
 	}
 
 	@Override
 	public int countAccount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public boolean existAccount(String accountNum) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = false;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getAccountNum().equals(accountNum)) {
+				ok = true;
+				break;
+			}
+		}
+		return ok;
 	}
 
 	@Override
-	public void findToday() {
-		// TODO Auto-generated method stub
-		
+	public String findToday() {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		return sdf.format(date);
 	}
 
 	@Override
-	public void withdrawMoney(int money) {
-		// TODO Auto-generated method stub
-		
+	public void depositMoney(String accountNum, int money) {
+		int depositMoney = 0;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getAccountNum().equals(accountNum) && money > 0) {
+				depositMoney = list.get(i).getMoney() + money;
+				list.get(i).setMoney(depositMoney);
+				break;
+			} 
+		}
 	}
 
 	@Override
-	public void depositMoney(int money) {
-		// TODO Auto-generated method stub
-		
+	public void withdrawMoney(String accountNum, int money) {
+		int withdrawMoney = 0;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getAccountNum().equals(accountNum) && money > 0 && list.get(i).getMoney() > money) {
+				withdrawMoney = list.get(i).getMoney() - money;
+				list.get(i).setMoney(withdrawMoney);
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void deleteAccountNum(String accountNum) {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getAccountNum().equals(accountNum)) {
+				list.remove(i);
+			}
+		}
+
 	}
-
-
 
 }

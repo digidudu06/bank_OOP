@@ -1,4 +1,7 @@
+
 package service;
+
+import java.util.ArrayList;
 
 import domain.AccountBean;
 
@@ -12,12 +15,13 @@ public interface AccountService {
 	/**
 	 * CREATE
 	 */
-	public void creatAccountNum(int money);
+	public void creatAccount(int money);
+	public String creatAccountNum();	//계좌 번호 생성
 
 	/**
 	 * READ
 	 */
-	public AccountBean[] findAll();
+	public ArrayList<AccountBean> findAll();
 
 	public AccountBean findByAccountNum(String accountNum);
 
@@ -25,17 +29,18 @@ public interface AccountService {
 
 	public boolean existAccount(String accountNum);
 	
-	public void findToday();
+	public String findToday();	//날짜 생성
 
 	/**
 	 * UPDATE
 	 */
-	public void withdrawMoney(int money);
+	public void depositMoney(String accountNum, int money);
 
-	public void depositMoney(int money);
+	public void withdrawMoney(String accountNum, int money);
 
 	/**
 	 * DELETE
 	 */
 	public void deleteAccountNum(String accountNum);
+	
 }
